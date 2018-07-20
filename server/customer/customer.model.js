@@ -11,6 +11,10 @@ const CustomerSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  accounts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Account'
+  }],
   location: {
     type: String,
     required: true,
@@ -68,6 +72,7 @@ CustomerSchema.statics = {
       .limit(+limit)
       .exec();
   }
+
 };
 
 /**

@@ -1,24 +1,27 @@
 const Promise = require('bluebird');
+
 const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 
 /**
- * Bank Schema
+ * Account Schema
  */
-const BankSchema = new mongoose.Schema({
-  bankname: {
-    type: String,
+const AccountSchema = new mongoose.Schema({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Customer',
     required: true
   },
-  location: {
-    type: String,
-    required: true,
-  },
-  accounts: [{
+  bank: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Account'
-  }],
+    ref: 'Bank',
+    required: true
+  },
+  balance: {
+   type: Number,
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -35,17 +38,17 @@ const BankSchema = new mongoose.Schema({
 /**
  * Methods
  */
-BankSchema.method({
+AccountSchema.method({
 });
 
 /**
  * Statics
  */
-BankSchema.statics = {
+AccountSchema.statics = {
   /**
    * Get bank
    * @param {ObjectId} id - The objectId of bank.
-   * @returns {Promise<Bank, APIError>}
+   * @returns {Promise<Account, APIError>}
    */
   get(id) {
     return this.findById(id)
@@ -59,11 +62,14 @@ BankSchema.statics = {
       });
   },
 
+
+
+
   /**
    * List banks in descending order of 'createdAt' timestamp.
    * @param {number} skip - Number of banks to be skipped.
    * @param {number} limit - Limit number of banks to be returned.
-   * @returns {Promise<Bank[]>}
+   * @returns {Promise<Account[]>}
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
@@ -75,6 +81,7 @@ BankSchema.statics = {
 };
 
 /**
- * @typedef Bank
+ * @typedef Account
  */
-module.exports = mongoose.model('Bank', BankSchema);
+module.exports = mongoose.model('Account', AccountSchema);
+
