@@ -1,5 +1,5 @@
 const Transaction = require('./transaction.model');
-const Transaction = require('../transaction/transaction.model');
+const Account = require('../account/account.model');
 /**
  * Load transaction and append to req.
  */
@@ -30,18 +30,15 @@ function create(req, res, next) {
   let toId;
   Account.findOne({ _id: req.body.to })
     .then((to) => {
-
       toId = to._id;
     });
   Account.findOne({ _id: req.body.from })
     .then((from) => {
-      if (from.balance < req.body.amount) {
-        res.send("Sender's account balance is too low for this transaction");
-      }
+      if (from.balance < req.body.amount) res.send("Sender's account balance is too low for this transaction");
       else {
         const transaction = new Transaction({
           to: toId,
-          from: from._id
+          from: from._id,
           amount: req.body.amount
         });
 
