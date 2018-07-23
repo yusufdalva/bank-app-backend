@@ -5,20 +5,20 @@ const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 
 /**
- * Account Schema
+ * Transaction Schema
  */
-const AccountSchema = new mongoose.Schema({
-  owner: {
+const TransactionSchema = new mongoose.Schema({
+  from: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Customer',
+    ref: 'Account',
     required: true
   },
-  bank: {
+  to: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bank',
+    ref: 'Account',
     required: true
   },
-  balance: {
+  amount: {
     type: Number,
     required: true
   },
@@ -38,17 +38,17 @@ const AccountSchema = new mongoose.Schema({
 /**
  * Methods
  */
-AccountSchema.method({
+TransactionSchema.method({
 });
 
 /**
  * Statics
  */
-AccountSchema.statics = {
+TransactionSchema.statics = {
   /**
    * Get bank
    * @param {ObjectId} id - The objectId of bank.
-   * @returns {Promise<Account, APIError>}
+   * @returns {Promise<Transaction, APIError>}
    */
   get(id) {
     return this.findById(id)
@@ -67,7 +67,7 @@ AccountSchema.statics = {
    * List banks in descending order of 'createdAt' timestamp.
    * @param {number} skip - Number of banks to be skipped.
    * @param {number} limit - Limit number of banks to be returned.
-   * @returns {Promise<Account[]>}
+   * @returns {Promise<Transaction[]>}
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
@@ -79,7 +79,7 @@ AccountSchema.statics = {
 };
 
 /**
- * @typedef Account
+ * @typedef Transaction
  */
-module.exports = mongoose.model('Account', AccountSchema);
+module.exports = mongoose.model('Transaction', TransactionSchema);
 

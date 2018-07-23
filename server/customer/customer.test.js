@@ -119,6 +119,4 @@ describe('## Customer APIs', () => {
         .catch(done);
     });
   });
-
-
 });

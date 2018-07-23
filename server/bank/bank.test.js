@@ -1,4 +1,3 @@
-{
   const mongoose = require('mongoose');
   const request = require('supertest-as-promised');
   const httpStatus = require('http-status');
@@ -97,7 +96,7 @@
       it('should get all banks (with limit and skip)', (done) => {
         request(app)
           .get('/api/banks')
-          .query({limit: 10, skip: 1})
+          .query({ limit: 10, skip: 1 })
           .expect(httpStatus.OK)
           .then((res) => {
             expect(res.body).to.be.an('array');
@@ -121,4 +120,3 @@
       });
     });
   });
-}

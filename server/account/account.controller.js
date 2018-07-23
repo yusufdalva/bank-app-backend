@@ -32,19 +32,20 @@ function create(req, res, next) {
   Bank.findOne({ name: req.body.bank })
     .then((bank) => {
       bankId = bank._id;
-      });
+    });
   Customer.findOne({ customername: req.body.name })
-    .then ((customer) =>  {
+    .then((customer) => {
       const account = new Account({
         owner: customer._id,
         bank: bankId,
         balance: req.body.balance
       });
 
-      account.save(function (err) {
-        if (err) console.log(err);
+      account.save((err) => {
+        if (err) res.send(err);
       });
     });
+  next();
 }
 /**
  * Update existing account
