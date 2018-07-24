@@ -21,7 +21,7 @@ services:
     env_file:
       - .env
 
-    # Overwrite any env var defined in .env file (if required)
+    # Overwrite any env var defined in .env.example file (if required)
     environment:
       - MONGO_HOST=mongodb://mongo/express-mongoose-es6-rest-api-test
       - DEBUG=express-mongoose-es6-rest-api:*

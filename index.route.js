@@ -1,5 +1,5 @@
 const express = require('express');
-const userRoutes = require('./server/user/user.route');
+// const userRoutes = require('./server/user/user.route');
 
 const customerRoutes = require('./server/customer/customer.route');
 const bankRoutes = require('./server/bank/bank.route');
@@ -15,8 +15,6 @@ router.get('/health-check', (req, res) =>
   res.send('OK')
 );
 
-// mount user routes at /users
-router.use('/users', userRoutes);
 
 // mount user routes at /users
 router.use('/accounts', accountRoutes);

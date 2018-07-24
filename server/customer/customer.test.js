@@ -7,6 +7,7 @@ const app = require('../../index');
 
 chai.config.includeStack = true;
 
+
 /**
  * root level hooks
  */
