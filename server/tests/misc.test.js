@@ -6,7 +6,7 @@ const app = require('../../index');
 
 chai.config.includeStack = true;
 
-describe('## Misc', () => {
+describe('## General Server Test', () => {
   describe('# GET /api/health-check', () => {
     it('should return OK', (done) => {
       request(app)
@@ -32,7 +32,7 @@ describe('## Misc', () => {
         .catch(done);
     });
   });
-
+/*
   describe('# Error Handling', () => {
     it('should handle mongoose CastError - Cast to ObjectId failed', (done) => {
       request(app)
@@ -59,4 +59,5 @@ describe('## Misc', () => {
         .catch(done);
     });
   });
+  */
 });

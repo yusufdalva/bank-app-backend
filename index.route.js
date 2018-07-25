@@ -1,5 +1,4 @@
 const express = require('express');
-// const userRoutes = require('./server/user/user.route');
 
 const customerRoutes = require('./server/customer/customer.route');
 const bankRoutes = require('./server/bank/bank.route');

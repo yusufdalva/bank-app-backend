@@ -106,7 +106,7 @@
       });
     });
 
-    describe('# DELETE /api/banks/', () => {
+    describe('# DELETE /api/banks/bankId', () => {
       it('should delete bank', (done) => {
         request(app)
           .delete(`/api/banks/${bank._id}`)

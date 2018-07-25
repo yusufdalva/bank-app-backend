@@ -1,6 +1,4 @@
 const Account = require('./account.model');
-const Customer = require('../customer/customer.model');
-const Bank = require('../bank/bank.model');
 /**
  * Load account and append to req.
  */
@@ -22,57 +20,21 @@ function get(req, res) {
 }
 
 /**
- * @param {string} bankId - The I.D. of the bank that is going to be validated from the database
- * @returns {Promise<any>}
- */
-function findBank(bankId) {
-  return new Promise((resolve, reject) => {
-    Bank.findOne({ _id: bankId })
-      .then(result => resolve(result[0]._id))
-      .catch(() => reject(new Error('Bank not found!')));
-  });
-}
-
-/**
- * @param {string} customerId - The ID of the bank that is going to be validated from the database
- * @returns {Promise<any>}
- */
-function findCustomer(customerId) {
-  return new Promise((resolve, reject) => {
-    Customer.findOne({ _id: customerId })
-      .then(result => resolve(result[0]._id))
-      .catch(() => reject(-1));
-  });
-}
-/**
  * Create new account
- * @property {string} req.body.bankId - ID of the bank which the account will belong
- * @property {string} req.body.customerId - ID of the customer which the account will belong
+ * @property {string} req.body.bank - ID of the bank which the account will belong
+ * @property {string} req.body.owner - ID of the customer which the account will belong
  * @property {Number} req.body.balance - The balance of the created account will have
  * @returns {Account}
  */
 function create(req, res, next) {
-  let bankId;
-  let customerId;
-  findBank(req.body.bankId)
-    .then((bank) => {
-      bankId = bank;
-      findCustomer(res.body.customerId)
-        .then((customer) => {
-          customerId = customer;
-        });
-    })
-    .then(() => {
-      const account = new Account({
-        owner: customerId,
-        bank: bankId,
-        balance: req.body.balance
-      });
-      account.save((err) => {
-        if (err) res.send(err);
-      });
-    });
-  next();
+  const account = new Account({
+    owner: req.body.owner,
+    bank: req.body.bank,
+    balance: req.body.balance
+  });
+  account.save()
+    .then(savedAccount => res.json(savedAccount))
+    .catch(e => next(e));
 }
 /**
  * Update existing account
