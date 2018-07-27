@@ -21,7 +21,9 @@
   describe('## Bank APIs', () => {
     let bank = {
       bankname: 'KK123',
-      location: 'ankara'
+      location: 'ankara',
+      longitude: 23728,
+      latitude: 287382
     };
 
     describe('# POST /api/banks', () => {
@@ -33,6 +35,8 @@
           .then((res) => {
             expect(res.body.bankname).to.equal(bank.bankname);
             expect(res.body.location).to.equal(bank.location);
+            expect(res.body.longitude).to.equal(bank.longitude);
+            expect(res.body.latitude).to.equal(bank.latitude);
             bank = res.body;
             done();
           })
@@ -48,6 +52,8 @@
           .then((res) => {
             expect(res.body.bankname).to.equal(bank.bankname);
             expect(res.body.location).to.equal(bank.location);
+            expect(res.body.latitude).to.equal(bank.latitude);
+            expect(res.body.longitude).to.equal(bank.longitude);
             done();
           })
           .catch(done);
@@ -114,6 +120,8 @@
           .then((res) => {
             expect(res.body.bankname).to.equal('KK');
             expect(res.body.location).to.equal(bank.location);
+            expect(res.body.longitude).to.equal(bank.longitude);
+            expect(res.body.latitude).to.equal(bank.latitude);
             done();
           })
           .catch(done);
