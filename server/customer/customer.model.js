@@ -15,7 +15,7 @@ const CustomerSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account'
   }],
-  location: {
+  email: {
     type: String,
     required: true,
   },

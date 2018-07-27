@@ -22,7 +22,7 @@ after((done) => {
 describe('## Customer APIs', () => {
   let customer = {
     customername: 'KK123',
-    location: 'ankara'
+    email: 'yruyeury@ıeurıeu.dıuı'
   };
 
   describe('# POST /api/customers', () => {
@@ -33,7 +33,7 @@ describe('## Customer APIs', () => {
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.customername).to.equal(customer.customername);
-          expect(res.body.location).to.equal(customer.location);
+          expect(res.body.email).to.equal(customer.email);
           customer = res.body;
           done();
         })
@@ -48,7 +48,7 @@ describe('## Customer APIs', () => {
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.customername).to.equal(customer.customername);
-          expect(res.body.location).to.equal(customer.location);
+          expect(res.body.email).to.equal(customer.email);
           done();
         })
         .catch(done);
@@ -75,7 +75,7 @@ describe('## Customer APIs', () => {
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.customername).to.equal('KK');
-          expect(res.body.location).to.equal(customer.location);
+          expect(res.body.email).to.equal(customer.email);
           done();
         })
         .catch(done);
@@ -114,7 +114,7 @@ describe('## Customer APIs', () => {
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.customername).to.equal('KK');
-          expect(res.body.location).to.equal(customer.location);
+          expect(res.body.email).to.equal(customer.email);
           done();
         })
         .catch(done);

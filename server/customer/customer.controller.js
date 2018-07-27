@@ -29,7 +29,7 @@ function get(req, res) {
 function create(req, res, next) {
   const customer = new Customer({
     customername: req.body.customername,
-    location: req.body.location
+    email: req.body.email
   });
 
   customer.save()
@@ -46,7 +46,7 @@ function create(req, res, next) {
 function update(req, res, next) {
   const customer = req.customer;
   customer.customername = req.body.customername;
-  customer.location = req.body.location;
+  customer.email = req.body.email;
 
   customer.save()
     .then(savedCustomer => res.json(savedCustomer))

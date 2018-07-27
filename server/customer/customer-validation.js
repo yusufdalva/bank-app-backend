@@ -5,7 +5,7 @@ module.exports = {
   createCustomer: {
     body: {
       customername: Joi.string().required(),
-      location: Joi.string().required()
+      email: Joi.string().required()
     }
   },
 
@@ -13,7 +13,7 @@ module.exports = {
   updateCustomer: {
     body: {
       customername: Joi.string().required(),
-      location: Joi.string().required()
+      email: Joi.string().required()
     },
     params: {
       customerId: Joi.string().hex().required()
