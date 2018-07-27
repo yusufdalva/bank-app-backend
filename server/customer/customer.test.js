@@ -94,7 +94,7 @@ describe('## Customer APIs', () => {
         .catch(done);
     });
 
-    it('should get all customers (with limit and skip)', (done) => {
+    it('should get all customers (limit and skip)', (done) => {
       request(app)
         .get('/api/customers')
         .query({ limit: 10, skip: 1 })
